@@ -20,6 +20,14 @@ const heading = document.querySelector('#administra');
 let editando = false;
 
 
+
+window.onload = () => {
+    console.log('Documento listo');
+}
+
+
+
+
 // Eventos
 eventListeners();
 function eventListeners() {
