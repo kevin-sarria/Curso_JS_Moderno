@@ -1,0 +1,15 @@
+{
+  "name": "51-testing-jest",
+  "version": "1.0.0",
+  "description": "Aprendiendo JEST",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Kevin Sarria",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "jest": "^28.1.1"
+  }
+}
