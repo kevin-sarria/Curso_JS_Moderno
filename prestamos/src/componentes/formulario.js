@@ -1,11 +1,52 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
+import { calcularTotal } from '../helpers';
 
-const Formulario = ( {cantidad, guardarCantidad, plazo, guardarPlazo} ) => {
+
+const Formulario = ( props ) => {
+
+    const {cantidad, guardarCantidad, plazo, guardarPlazo, total, guardarTotal, guardarCargando} = props;
+
+    // Definir state
+    const [ error, guardarError ] = useState(false);
+
+
+
+
+    // Cuando el usuario hace submit
+    const calcularPrestamo = e => {
+        e.preventDefault();
+
+        // Validar
+        if( cantidad === 0 || plazo === '' ) {
+            guardarError(true);
+            return;
+        }
+
+        // Eliminar el error previo
+        guardarError(false);
+
+        // Habilitar el spinner
+        guardarCargando(true);
+
+        setTimeout(() => {
+
+            //  Realizar la cotización
+            const total = calcularTotal(cantidad, plazo)
+
+            // Una vez calculado, guardar total
+            guardarTotal(total);
+
+            // Deshabilitar el Spinner
+            guardarCargando(false);
+
+        }, 3000);
+
+    }
 
 
     return (
-        <form>
-            {cantidad} {plazo}
+        <Fragment>
+        <form onSubmit={calcularPrestamo}>
             <div className="row">
                 <div>
                     <label>Cantidad Prestamo</label>
@@ -39,6 +80,9 @@ const Formulario = ( {cantidad, guardarCantidad, plazo, guardarPlazo} ) => {
                 </div>
             </div>
         </form>
+
+        { error ? <p className="error">Todos los campos son obligatorios</p> : null }
+        </Fragment>
     );
 }
 
